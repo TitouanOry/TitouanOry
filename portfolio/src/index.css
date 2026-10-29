@@ -1,0 +1,82 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+/*
+ * ===== Thème =====
+ * Change la couleur d'accent ici : une seule ligne à modifier.
+ * (Exemples : bleu océan #1F4FFF, vert bouée #00A86B, rouge spi #E63946)
+ */
+@theme {
+  --color-accent: #ff5a1f;
+  --color-paper: #f6f5f1; /* fond clair, légèrement chaud */
+  --color-ink: #111111; /* texte principal */
+  --color-muted: #77736b; /* texte secondaire */
+  --color-line: #e3e0d8; /* filets et séparateurs */
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-paper text-ink font-sans;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    @apply bg-accent text-white;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+/* ===== Disque vinyle (sillons en dégradé + étiquette couleur accent) ===== */
+.vinyl {
+  background:
+    radial-gradient(circle, #111 0 2.2%, transparent 2.3%),
+    radial-gradient(circle, var(--color-accent) 0 17%, #1a1a1a 17.5% 19%, transparent 19.5%),
+    repeating-radial-gradient(circle, #151515 0 1.1px, #222 1.6px 2.6px),
+    #161616;
+  box-shadow: 0 20px 50px -20px rgb(0 0 0 / 0.5);
+}
+.vinyl::after {
+  /* reflet lumineux qui donne le relief du disque */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: conic-gradient(from 30deg, transparent 0 10%, rgb(255 255 255 / 0.09) 14%, transparent 22% 55%, rgb(255 255 255 / 0.07) 62%, transparent 70%);
+}
+.vinyl-spin {
+  animation: spin 9s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== Ombre des pochettes ===== */
+.sleeve {
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.08),
+    0 24px 48px -18px rgb(0 0 0 / 0.35);
+}
+
+/* ===== Accessibilité : pas d'animation si l'utilisateur l'a demandé ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
