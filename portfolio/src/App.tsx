@@ -8,7 +8,7 @@ import Home from "./pages/Home";
 const ProjectPage = lazy(() => import("./pages/Project"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+import NotFound from "./pages/NotFound";
 
 /** Remonte en haut de page à chaque changement d'URL. */
 function ScrollToTop() {

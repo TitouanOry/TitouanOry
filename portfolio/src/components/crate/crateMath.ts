@@ -85,10 +85,13 @@ export function cardStyle(offset: number, l: CrateLayout, reduced: boolean): Car
   const shade = t * 0.08 + clamp(abs - 1, 0, 6) * 0.025;
 
   if (reduced) {
+    // Sans perspective, les cartes ne rétrécissent pas avec la distance : on resserre la pile
     const scale = lerp(1, 0.86, t);
+    const rx = l.originX + (x - l.originX) * 0.6;
+    const ry = l.originY + (y - l.originY) * 0.6;
     return {
-      transform: `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${scale})`,
-      opacity,
+      transform: `translate(-50%, -50%) translate(${rx}px, ${ry}px) scale(${scale})`,
+      opacity: offset > 0 ? Math.min(opacity, clamp(1 - (abs - 3) * 0.6, 0, 1)) : opacity,
       zIndex,
       shade,
     };

@@ -13,6 +13,8 @@ export default function Home() {
 
   useEffect(() => {
     document.title = "Titouan Ory — Portfolio";
+    // Précharge la page projet pour que la transition démarre sans attente
+    void import("./Project");
   }, []);
 
   const handleOpen = useCallback(
