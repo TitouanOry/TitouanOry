@@ -4,3 +4,4 @@ dist
 .vercel
 .netlify
 images-src
+dist-artifact

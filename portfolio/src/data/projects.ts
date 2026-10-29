@@ -46,7 +46,7 @@ export interface Project {
 
 // Petit raccourci pour éviter de répéter les chemins des projets fictifs.
 // Pour tes vrais projets, tu peux écrire les chemins en entier.
-const img = (slug: string, file: string) => `/projects/${slug}/${file}`;
+const img = (slug: string, file: string) => `${import.meta.env.BASE_URL}projects/${slug}/${file}`;
 
 export const projects: Project[] = [
   {
